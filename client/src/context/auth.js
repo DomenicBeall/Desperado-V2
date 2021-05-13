@@ -52,8 +52,6 @@ function AuthProvider(props) {
             const token = response.data.token;
             const userData = jwtDecode(token).user;
 
-            console.log(jwtDecode(token));
-
             localStorage.setItem('JWT', token);
             
             dispatch({
