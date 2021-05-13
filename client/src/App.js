@@ -1,15 +1,34 @@
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Elements
 import Background from './components/background';
-import Header from './components/header';
+
+// Pages
+import Landing from './pages/landing';
+import Login from './pages/login';
+import Register from './pages/register';
+
+import './App.css';
+import { AuthProvider } from './context/auth';
+
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Background/>
       <div style={{ padding: "1rem" }}>
-        <Header/>
-        <h1 style={{ color: "white", textAlign: "center", fontSize: "2rem" }}>Welcome to Desperado... again...</h1>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route>
+              <h1 style={{ color: "white", textAlign: "center" }}>Oh dear, looks like this page doesn't exist :(</h1>
+            </Route>
+          </Switch>
+        </Router>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 

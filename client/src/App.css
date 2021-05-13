@@ -1,0 +1,47 @@
+@import url("https://use.typekit.net/ads2wbu.css");
+
+* {
+    font-family: basic-sans, sans-serif;
+}
+
+.btn-hollow {
+    border: 5px solid white;
+    border-radius: 5px;
+
+    color: white;
+}
+
+.btn-hollow:hover {
+    color: black;
+    background-color: white;
+
+    transform: scale(1.05);
+}
+
+.btn-solid {
+    border: 5px solid white;
+    border-radius: 5px;
+
+    background-color: white;
+    color: black;
+}
+
+.btn-solid:hover {
+    background-color: transparent;
+    color: white;
+    
+    transform: scale(1.05);
+}
+
+.btn {
+    padding: 1rem;
+    text-decoration: none;
+    min-width: 7rem;
+    text-align: center;
+    
+    font-weight: 700;
+
+    margin-left: 1rem;
+
+    transition: all 0.1s ease-out;
+}
