@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Elements
-import Background from './components/background';
+import Background from './components/Background';
 
 // Pages
 import Landing from './pages/landing';
@@ -10,7 +10,6 @@ import Register from './pages/register';
 
 import './App.css';
 import { AuthProvider } from './context/auth';
-
 
 function App() {
   return (

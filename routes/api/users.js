@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
 
     // Save the user and send back a JWT
     user.save((err) => {
-        const token = jwt.sign({user: user}, process.env.JWT_KEY, { expiresIn: "1h" });
+        const token = jwt.sign({user: user, expiry: Math.floor(Date.now() / 1000) + (60 * 60)}, process.env.JWT_KEY, { expiresIn: "1h" });
 
         res.json({ token: token });
     });
@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
 // Route for logging in an already created user
 router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
 
-    const token = jwt.sign( { user: req.user }, process.env.JWT_KEY );
+    const token = jwt.sign( { user: req.user, expiry: Math.floor(Date.now() / 1000) + (60 * 60)}, process.env.JWT_KEY );
 
     res.json({ token: token });
 
