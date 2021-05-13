@@ -43,14 +43,13 @@ function AuthProvider(props) {
     const [ state, dispatch ] = useReducer(authReducer, initialState);
 
     function login(email, password) {
-
         Axios({
             method: 'POST',
             url: '/api/user/login', 
             data: { email: email, password: password }
           }, {withCredentials: true})
           .then((response) => {
-            const token = response.data;
+            const token = response.data.token;
             const userData = jwtDecode(token).user;
 
             localStorage.setItem('JWT', token);

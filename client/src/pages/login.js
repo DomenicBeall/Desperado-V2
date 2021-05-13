@@ -1,10 +1,11 @@
-import Header from '../components/header';
+import Header from '../components/Header';
+import LoginForm from '../components/LoginForm';
 
 function Login() {
   return (
     <div>
       <Header/>
-      <h1 style={{color: "white"}}>This is the login.</h1>
+      <LoginForm/>
     </div>
   );
 }
