@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Hash passwords on creation
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next) {
     let user = this;
 
     if ( !user.isModified('password') ) return next();
@@ -34,6 +34,19 @@ UserSchema.pre('save', (next) => {
         next();
     });
 });
+
+// A function for checking an attempted password against the stored password
+UserSchema.methods.login = function(password) {
+    let user = this;
+
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err) { return reject(err) }
+
+            resolve(result);
+        });
+    });
+}
 
 const User = mongoose.model('User', UserSchema);
 
