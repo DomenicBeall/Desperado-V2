@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 // Elements
 import Background from './components/Background';
@@ -10,6 +10,7 @@ import Register from './pages/register';
 
 import './App.css';
 import { AuthProvider } from './context/auth';
+import AntiAuthRoute from './context/AntiAuthRoute';
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <AntiAuthRoute exact path="/login" component={Login} />
+            <AntiAuthRoute exact path="/register" component={Register} />
             <Route>
               <h1 style={{ color: "white", textAlign: "center" }}>Oh dear, looks like this page doesn't exist :(</h1>
+              <div style={{ color: "white", textAlign: "center" }}>Click <Link to="/">here</Link> to go home.</div>
             </Route>
           </Switch>
         </Router>

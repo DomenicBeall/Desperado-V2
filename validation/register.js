@@ -3,7 +3,7 @@ const isEmpty = require("is-empty");
 
 module.exports = (body) => {
 
-    let errors = {};
+    let errors = [];
 
     body.username = !isEmpty(body.username) ? body.username : "";
     body.email = !isEmpty(body.email) ? body.email : "";
@@ -12,28 +12,28 @@ module.exports = (body) => {
 
     // Username validation
     if (Validator.isEmpty(body.username)) {
-        errors.username = "A username is required.";
+        errors.push("A username is required.");
     }
 
     // Email validation
     if (Validator.isEmpty(body.email)) {
-        errors.email = "An email is required.";
+        errors.push("An email is required");
     } else if (!Validator.isEmail(body.email)) {
-        errors.email = "The email entered is invalid.";
+        errors.push("The email entered is invalid.");
     }
 
     // Password validation
     if (Validator.isEmpty(body.password)) {
-        errors.password = "A password is required.";
+        errors.push("A password is required.");
     }
     if (Validator.isEmpty(body.confirmPassword)) {
-        errors.password = "A confirmation password is required.";
+        errors.push("A confirmation password is required.");
     }
     if (!Validator.isLength(body.password, { min: 6, max: 20 })) {
-        errors.password = "Password must be between 6 and 20 characters long.";
+        errors.push("Password must be between 6 and 20 characters long.");
     }
     if (!Validator.equals(body.password, body.confirmPassword)) {
-        errors.confirmPassword = "Confirmation password must match password.";
+        errors.push("Confirmation password must match password.");
     }
 
     return {

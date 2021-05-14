@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
 
     // Return errors if the form data is invalid
     if (!isValid) {
-        return res.status(400).json(errors);
+        return res.status(400).json({ errors: errors });
     }
 
     // Create a new user

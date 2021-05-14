@@ -43,25 +43,30 @@ function AuthProvider(props) {
     const [ state, dispatch ] = useReducer(authReducer, initialState);
 
     function login(email, password) {
-        Axios({
-            method: 'POST',
-            url: '/api/user/login', 
-            data: { email: email, password: password }
-          }, {withCredentials: true})
-          .then((response) => {
-            const token = response.data.token;
-            const userData = jwtDecode(token).user;
 
-            localStorage.setItem('JWT', token);
-            
-            dispatch({
-                type: 'LOGIN',
-                payload: userData
-            });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        return new Promise((resolve, reject) => {
+            Axios({
+                method: 'POST',
+                url: '/api/user/login', 
+                data: { email: email, password: password }
+              }, {withCredentials: true})
+              .then((response) => {
+                const token = response.data.token;
+                const userData = jwtDecode(token).user;
+    
+                localStorage.setItem('JWT', token);
+                
+                dispatch({
+                    type: 'LOGIN',
+                    payload: userData
+                });
+
+                resolve(token);                
+              })
+              .catch((error) => {
+                reject(error);
+              });
+        });        
     }
 
     function logout() {

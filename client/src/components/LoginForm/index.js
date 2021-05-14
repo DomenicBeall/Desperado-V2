@@ -8,7 +8,9 @@ class Form extends Component {
   // Setting the form's initial state
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: false,
+    loading: false
   };
 
   handleInputChange = event => {
@@ -23,12 +25,19 @@ class Form extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    this.context.login(this.state.email, this.state.password);
+    this.setState({ loading: true });
 
-    this.setState({
-        email: "",
-        password: ""
+    this.context.login(this.state.email, this.state.password)
+    .then((token) => {
+      this.setState({ error: false });
+    })
+    .catch((err) => {
+      this.setState({ error: true });
+    })
+    .then(() => {
+      this.setState({ password: "", loading: false});
     });
+
   };
 
   render() {
@@ -53,7 +62,20 @@ class Form extends Component {
             type="password"
           />
 
-          <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
+          <button className="hb-filled" onClick={this.handleFormSubmit} disabled={this.state.loading}>
+          {this.state.loading ?
+            <div class="loader"></div>
+          :
+            "Sign In"
+          }
+          </button>
+
+          {
+            this.state.error ?
+              <div className="error-msg">Please enter valid login details and retry.</div>
+              :
+              <></>
+          }
         </form>
       </div>
     ); 
