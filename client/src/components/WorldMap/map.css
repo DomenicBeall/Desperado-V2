@@ -3,15 +3,38 @@
     width: 100%;
 }
 
+.map-icon-parent {
+    transform: translate(-50%, -50%);
+}
+
 .map-icon {
-    width: 60px;
-    height: 60px;
+    height: 4rem;
+    transition: 0.1s linear;
+}
+
+.map-icon:hover {
+    cursor: pointer;
+
+    transform: scale(1.2);
+}
+
+.cluster-parent-icon {
+    color: black;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.cluster-icon {
+    height: 2.5rem;
+
     transform: translate(-50%, -50%);
 
     transition: 0.1s linear;
 }
 
-.map-icon:hover {
-    transform: scale(1.2) translate(-40%, -40%);
-    cursor: pointer;
+.cluster-num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
 }
