@@ -11,12 +11,15 @@ function Header() {
   return (
     <header>
       <div className="header-section">
+      <Link to="/">
         <img src={Logo} alt="The desperado logo" />
+      </Link>
       </div>
       {
         user ?
         <div className="header-section">
-          <div className="btn btn-hollow" onClick={logout}>Logout</div>
+          <Link className="btn btn-solid" to="/createGame">Create Game</Link>
+          <div className="btn btn-hollow" onClick={logout}>Logout of {user.username}</div>
         </div>
         :
         <div className="header-section">

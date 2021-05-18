@@ -8,7 +8,6 @@ const registerValidator = require("../../validation/register.js");
 
 // Route for registering a new user
 router.post('/register', (req, res) => {
-
     // Form validation
     const { errors, isValid } = registerValidator(req.body);
 

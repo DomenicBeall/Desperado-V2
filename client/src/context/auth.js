@@ -9,7 +9,7 @@ const initialState = {
 if (localStorage.getItem('JWT')) {
     const decodedToken = jwtDecode(localStorage.getItem('JWT'));
 
-    if (decodedToken.expiry < Date.now()) {
+    if (decodedToken.expiry * 1000 < Date.now()) {
       localStorage.removeItem('JWT');
     } else {
       initialState.user = decodedToken.user;
@@ -43,7 +43,6 @@ function AuthProvider(props) {
     const [ state, dispatch ] = useReducer(authReducer, initialState);
 
     function login(email, password) {
-
         return new Promise((resolve, reject) => {
             Axios({
                 method: 'POST',

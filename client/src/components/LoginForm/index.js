@@ -28,14 +28,8 @@ class Form extends Component {
     this.setState({ loading: true });
 
     this.context.login(this.state.email, this.state.password)
-    .then((token) => {
-      this.setState({ error: false });
-    })
     .catch((err) => {
-      this.setState({ error: true });
-    })
-    .then(() => {
-      this.setState({ password: "", loading: false});
+      this.setState({ error: true, password: "", loading: false});
     });
 
   };
@@ -44,6 +38,7 @@ class Form extends Component {
     return (
       <div>
         <form className="form">
+          <h1 className="subtitle">Login</h1>
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -64,9 +59,9 @@ class Form extends Component {
 
           <button className="hb-filled" onClick={this.handleFormSubmit} disabled={this.state.loading}>
           {this.state.loading ?
-            <div class="loader"></div>
+            <div className="loader"></div>
           :
-            "Sign In"
+            "Log In"
           }
           </button>
 

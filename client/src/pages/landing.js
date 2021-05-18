@@ -1,10 +1,11 @@
 import Header from '../components/Header';
+import WorldMap from '../components/WorldMap';
 
 function Landing() {
   return (
     <div>
       <Header/>
-      <h1 style={{color: "white"}}>This is the landing.</h1>
+      <WorldMap/>
     </div>
   );
 }
