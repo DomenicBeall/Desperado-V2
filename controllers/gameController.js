@@ -2,7 +2,7 @@ const models = require("../models");
 
 module.exports = {
     getAll: function(req, res) {
-        models.Game.find()
+        models.Game.find().populate("challenger").populate("responder")
         .then(games => res.json(games))
         .catch(err => {
             console.log(err);

@@ -103,23 +103,35 @@ class WorldMap extends Component {
         {this.state.clusters.map((item, index) => {
             if (item.numPoints === 1) {
               return (
-                <div className="map-icon-parent" key={index} lat={item.points[0].lat} lng={item.points[0].lng}>
-                  <img src={iconPawn} alt="Pawn icon" className="map-icon"></img>
-                </div>
+                <MapMarker key={index} item={item} index={index} lat={item.points[0].lat} lng={item.points[0].lng}/>
               );
             }
 
             return (
-              <div className="cluster-parent-icon" key={index} lat={item.points[0].lat} lng={item.points[0].lng}>
-                <img src={iconCluster} alt="Pawn icon" className="cluster-icon" ></img>
-                <p className="cluster-num">{item.numPoints}</p>
-              </div>
+                <ClusterMarker key={index} item={item} index={index} lat={item.points[0].lat} lng={item.points[0].lng} />
             );
           })}
         </GoogleMapReact>
       </div>
     );
   }
+}
+
+function MapMarker(props) {
+  return (
+    <div onClick={() => {console.log(props.item)}} className="map-icon-parent">
+      <img src={iconPawn} alt="Pawn icon" className="map-icon"></img>
+    </div>
+  );
+}
+
+function ClusterMarker(props) {
+  return(
+    <div className="cluster-parent-icon">
+      <img src={iconCluster} alt="Pawn icon" className="cluster-icon" ></img>
+      <p className="cluster-num">{props.item.numPoints}</p>
+    </div>
+  );
 }
 
 WorldMap.contextType = AuthContext;
