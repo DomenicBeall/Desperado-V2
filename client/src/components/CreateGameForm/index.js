@@ -65,11 +65,13 @@ class Form extends Component {
 
   parseLocation = (location) => {
     const placeID = location.value.place_id;
-    
+    const placeName = location.label;
+
     geocodeByPlaceId(placeID)
       .then(results => getLatLng(results[0]))
       .then((coords) => {
-        this.setState({ location: coords });
+        console.log({...coords, placeName});
+        this.setState({ location: {...coords, placeName} });
       })
       .catch(error => console.error(error));
   }
@@ -117,10 +119,10 @@ class Form extends Component {
 
             <label htmlFor="timeControl">Time control</label>
             <select name="timeControl" id="timeControl" onChange={this.handleInputChange}>
-              <option value="bullet">Bullet</option>
-              <option value="blitz">Blitz</option>
-              <option value="rapid">Rapid</option>
-              <option value="classical">Classical</option>
+              <option value="Bullet">Bullet</option>
+              <option value="Blitz">Blitz</option>
+              <option value="Rapid">Rapid</option>
+              <option value="Classical">Classical</option>
             </select>
 
             <button className="btn-filled" onClick={this.handleFormSubmit} disabled={this.state.loading}>

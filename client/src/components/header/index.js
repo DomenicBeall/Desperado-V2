@@ -18,6 +18,7 @@ function Header() {
       {
         user ?
         <div className="header-section">
+          <Link className="btn btn-solid" to={"/user/" + user._id}>View Profile</Link>
           <Link className="btn btn-solid" to="/createGame">Create Game</Link>
           <div className="btn btn-hollow" onClick={logout}>Logout of {user.username}</div>
         </div>

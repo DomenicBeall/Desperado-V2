@@ -6,8 +6,8 @@ import supercluster from 'points-cluster';
 
 import "./map.css";
 import iconPawn from '../../assets/icon-pawn.svg';
-import iconPawnHollow from '../../assets/icon-pawn-hollow.svg';
 import iconCluster from '../../assets/icon-cluster.svg';
+import GameSelectPanel from '../GameSelectPanel';
 
 class WorldMap extends Component {
 
@@ -17,8 +17,12 @@ class WorldMap extends Component {
     this.state = {
       games: [], 
       location: { lat: 60.814305, lng: 47.051773 },
-      clusters: []
+      clusters: [],
+      selectedGame: null
     };
+
+    this.handleGameSelect = this.handleGameSelect.bind(this);
+    this.handleGameAccept = this.handleGameAccept.bind(this);
   }
 
   getClusters = props => {
@@ -89,10 +93,34 @@ class WorldMap extends Component {
     });
   }
 
+  handleGameSelect(game) {
+    if (this.state.selectedGame === game) {
+      this.setState({ selectedGame: null });
+    } else {
+      this.setState({ selectedGame: game });
+    }
+  }
+
+  handleGameAccept(game) {
+    Axios({
+      method: 'POST',
+      url: '/api/games/accept/' + game._id, 
+      data: { user_id: this.context.user._id }
+    }, {withCredentials: true})
+    .then((response) => {
+      //this.setState({ errors: [], loading: false, redirect: "/login" });
+    })
+    .catch((error) => {
+      //this.setState({ errors: error.response.data.errors, loading: false });
+    });
+  }
+
   render() {
     return (
       // Important! Always set the container height explicitly
       <div className="map-container">
+        <GameSelectPanel handleGameAccept={this.handleGameAccept} game={this.state.selectedGame} />
+
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyALoz7rDY5iHKbGa9gWh_0EtaITjIXAQzc" }}
           center={(this.state.location)}
@@ -103,7 +131,7 @@ class WorldMap extends Component {
         {this.state.clusters.map((item, index) => {
             if (item.numPoints === 1) {
               return (
-                <MapMarker key={index} item={item} index={index} lat={item.points[0].lat} lng={item.points[0].lng}/>
+                <MapMarker key={index} item={item} index={index} lat={item.points[0].lat} lng={item.points[0].lng} selectGame={this.handleGameSelect}/>
               );
             }
 
@@ -119,7 +147,7 @@ class WorldMap extends Component {
 
 function MapMarker(props) {
   return (
-    <div onClick={() => {console.log(props.item)}} className="map-icon-parent">
+    <div onClick={() => {props.selectGame(props.item.points[0])}} className="map-icon-parent">
       <img src={iconPawn} alt="Pawn icon" className="map-icon"></img>
     </div>
   );

@@ -13,6 +13,10 @@ const GameSchema = new mongoose.Schema({
         lng : {
             type: Number,
             required: true
+        },
+        placeName: {
+            type: String,
+            required: true
         }
     },
     timeControl: {

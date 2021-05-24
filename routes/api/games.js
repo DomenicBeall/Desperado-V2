@@ -16,6 +16,11 @@ router.post('/create', (req, res) => {
     gameController.createGame(req, res);
 });
 
+// Route for accepting a game
+router.post('/accept/:id', (req, res) => {
+    gameController.acceptGame(req, res);
+});
+
 // Route for getting all games
 router.get('/getAll', (req, res) => {
     gameController.getAll(req, res);

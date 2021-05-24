@@ -20,7 +20,8 @@ router.post('/register', (req, res) => {
     const user = new models.User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        rating: req.body.rating
     });
 
     // Save the user and send back a JWT

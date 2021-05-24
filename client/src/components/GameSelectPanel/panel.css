@@ -1,0 +1,35 @@
+.panel {
+    height: 100%;
+    background-color: white;
+
+    transition: 0.1s ease-in-out;
+
+    box-sizing: border-box;
+}
+
+.username {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.details {
+    font-size: 1.5rem;
+}
+
+.icon {
+    height: 2rem;
+    width: 2rem;
+}
+
+.iconparent {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 2rem;
+}
+
+.detailrow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1.5rem;
+}

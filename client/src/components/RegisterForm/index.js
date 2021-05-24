@@ -13,6 +13,7 @@ class Form extends Component {
     password: "",
     confirmPassword: "",
     username: "",
+    rating: null,
     errors: [],
     loading: false,
     redirect: ""
@@ -36,7 +37,7 @@ class Form extends Component {
     Axios({
       method: 'POST',
       url: '/api/user/register', 
-      data: { username: this.state.username, email: this.state.email, password: this.state.password, confirmPassword: this.state.confirmPassword }
+      data: { username: this.state.username, email: this.state.email, password: this.state.password, confirmPassword: this.state.confirmPassword, rating: this.state.rating }
     }, {withCredentials: true})
     .then((response) => {
       this.setState({ errors: [], loading: false, redirect: "/login" });
@@ -87,6 +88,15 @@ class Form extends Component {
               name="confirmPassword"
               onChange={this.handleInputChange}
               type="password"
+            />
+
+            <label htmlFor="rating">Rating</label>
+            <input
+              id="rating"
+              value={this.state.rating}
+              name="rating"
+              onChange={this.handleInputChange}
+              type="number"
             />
 
 

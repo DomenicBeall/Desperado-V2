@@ -1,5 +1,6 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
+const { validate } = require("../models/user");
 
 module.exports = (body) => {
 
@@ -9,6 +10,7 @@ module.exports = (body) => {
     body.email = !isEmpty(body.email) ? body.email : "";
     body.password = !isEmpty(body.password) ? body.password : "";
     body.confirmPassword = !isEmpty(body.confirmPassword) ? body.confirmPassword : "";
+    body.rating = !isEmpty(body.rating) ? body.rating : 0;
 
     // Username validation
     if (Validator.isEmpty(body.username)) {
@@ -34,6 +36,14 @@ module.exports = (body) => {
     }
     if (!Validator.equals(body.password, body.confirmPassword)) {
         errors.push("Confirmation password must match password.");
+    }
+
+    // Rating validation
+    if (body.rating <= 0) {
+        errors.push("Please add a valid approximate rating.");
+    }
+    if (body.rating > 3000) {
+        errors.push("Who are you? Magnus Carlsen? Bring that rating down below the moon please.");
     }
 
     return {

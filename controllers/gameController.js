@@ -19,6 +19,12 @@ module.exports = {
             res.end();
         });
     },
+    acceptGame: function(req, res) {
+        const id = req.params.id;
+        const userID = req.body.user_id;
+
+        // Update the game by adding the responder
+    },
     updateGame: function(details) {
 
     },
