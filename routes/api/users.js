@@ -41,4 +41,14 @@ router.post('/login', passport.authenticate('local', { session: false }), (req, 
 
 });
 
+// Route for getting a user
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+
+    models.User.findById(id)
+    .then((response) => {
+        res.json(response);
+    });
+});
+
 module.exports = router;
