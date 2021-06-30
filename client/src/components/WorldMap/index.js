@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useContext } from 'react';
 import { AuthContext } from '../../context/auth';
 import GoogleMapReact from 'google-map-react';
 import Axios from 'axios';
@@ -6,6 +6,7 @@ import supercluster from 'points-cluster';
 
 import "./map.css";
 import iconPawn from '../../assets/icon-pawn.svg';
+import iconPawnHollow from '../../assets/icon-pawn-hollow.svg';
 import iconCluster from '../../assets/icon-cluster.svg';
 import GameSelectPanel from '../GameSelectPanel';
 
@@ -146,9 +147,12 @@ class WorldMap extends Component {
 }
 
 function MapMarker(props) {
+  const game = props.item.points[0];
+  const { user } = useContext(AuthContext);
+
   return (
-    <div onClick={() => {props.selectGame(props.item.points[0])}} className="map-icon-parent">
-      <img src={iconPawn} alt="Pawn icon" className="map-icon"></img>
+    <div onClick={() => { props.selectGame(game)}} className="map-icon-parent">
+      <img src={user !== null && user._id === game.challenger._id ? iconPawnHollow : iconPawn} alt="Pawn icon" className="map-icon"></img>
     </div>
   );
 }

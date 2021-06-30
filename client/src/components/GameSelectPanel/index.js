@@ -1,4 +1,6 @@
 import "./panel.css";
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth';
 
 import iconChessClock from '../../assets/icon-chessclock.svg';
 import iconClock from '../../assets/icon-clock.svg';
@@ -7,6 +9,7 @@ import iconLocation from '../../assets/icon-location.svg';
 
 function GameSelectPanel (props) {
   const open = !(props.game === null);
+  const { user } = useContext(AuthContext);
 
   return(
     <div className="panel" style={ open ? { padding: "2rem", width: "40%"} : { padding: 0, width: "0%"}}>
@@ -15,7 +18,7 @@ function GameSelectPanel (props) {
       <></>
       :
       <div style={{ height: "100%" }}>
-        <p className="username">{props.game.challenger.username}</p>
+        <p className="username">{(user !== null && user._id === props.game.challenger._id) ? "You" : props.game.challenger.username}</p>
         <p style={{ fontSize: "1.5rem" }}>Rating: {props.game.challenger.rating}</p>
         <div className="detailrow">
           <div className="iconparent"><img className="icon" src={iconLocation} alt="A map marker icon"/></div>
@@ -29,7 +32,12 @@ function GameSelectPanel (props) {
           <div className="iconparent"><img className="icon" src={iconChessClock} alt="A chess clock icon"/></div>
           <p className="details">{props.game.timeControl}</p>
         </div>
-        <div onClick={() => {props.handleGameAccept(props.game)}} className="btn btn-black" style={{ margin: "0", marginTop: "5em" }}>Accept Game</div>
+        {
+          (user !== null && user._id !== props.game.challenger._id) ?
+            <div onClick={() => {props.handleGameAccept(props.game)}} className="btn btn-black" style={{ margin: "0", marginTop: "5em" }}>Accept Game</div>
+            :
+            <></>
+        }
       </div>
     }
     </div>
