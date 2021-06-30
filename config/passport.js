@@ -21,16 +21,16 @@ passport.use(new LocalStrategy({ usernameField: "email", passwordField: "passwor
         }
 
         // Check the submitted password against the hashed password
-        user.login(password).then((res) => {
-            
-            if (res)
-                return done(null, user);
+        user.login(password)
+            .then((res) => {
+                if (res)
+                    return done(null, user);
 
-            return done(err, false);
-
-        }).catch((err) => {
-            console.error(err);
-        });
+                return done(err, false);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
 
     });
 

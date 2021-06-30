@@ -1,0 +1,29 @@
+.heading {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.subheading {
+    font-size: 1.5rem;
+}
+
+.description {
+    padding-top: 1rem;
+    color: rgba(0, 0, 0, 0.329);
+}
+
+.usercontainer {
+    width: 100%;
+    height: 30%;
+    background-color: white;
+    margin-bottom: 1%;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+
+    border-radius: 5px;
+}
+
+img {
+    height: 100%;
+}

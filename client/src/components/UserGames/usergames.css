@@ -1,0 +1,18 @@
+.gamescontainer {
+    width: 100%;
+    height: 69%;
+    background-color: white;
+    margin-bottom: 1%;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+
+    border-radius: 5px;
+}
+
+.gamesheading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
